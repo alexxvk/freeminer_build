@@ -50,11 +50,8 @@ if [ ! -f "_externals/leveldb/bin/libleveldb.dll" ]
 then
 	mkdir -p _externals/leveldb/bin/
 	mkdir -p _externals/leveldb/lib/
-	cp -r externals/leveldb-1.15/* _externals/leveldb/
+	cp -r $TOP/external/leveldb/* _externals/leveldb/
 	cd _externals/leveldb/
-	# The patch file is build from https://github.com/bitcoin/bitcoin
-	# and https://github.com/zalanyib/leveldb-mingw
-	patch -p1 < $hostdir/leveldb.patch
 	TARGET_OS=OS_WINDOWS_CROSSCOMPILE CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ AR=x86_64-w64-mingw32-ar \
         make libleveldb.a libleveldb.dll
 	mv libleveldb.a libleveldb.dll.a lib/
