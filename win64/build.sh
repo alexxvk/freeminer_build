@@ -6,6 +6,7 @@ host=`head -1 /etc/issue`
 
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 topdir=$dir/../../minetest
+TOP=$dir/../..
 libdir=$dir/externals
 
 if [[ "Fedora release 20 (Heisenbug)" == "$host" ]]
@@ -16,7 +17,6 @@ else
 	toolchain_file=$dir/toolchain_mingw64.cmake
 fi
 . $hostdir/env.sh
-irrlicht_version=1.8.1
 
 # Get minetest_game
 #cd $topdir/games
@@ -29,12 +29,12 @@ irrlicht_version=1.8.1
 #Build dependancies
 # irrlicht
 cd $topdir
-if [ ! -f "_externals/irrlicht-$irrlicht_version/bin/Win64-gcc/Irrlicht.dll" ]
+if [ ! -f "_externals/irrlicht/bin/Win64-gcc/Irrlicht.dll" ]
 then
-	mkdir -p _externals/irrlicht-$irrlicht_version/bin/Win64-gcc
-	mkdir -p _externals/irrlicht-$irrlicht_version/lib/Win64-gcc
-	cp -r externals/irrlicht-1.8.1/* _externals/irrlicht-$irrlicht_version/
-	cd _externals/irrlicht-$irrlicht_version/source/Irrlicht/
+	mkdir -p _externals/irrlicht/bin/Win64-gcc
+	mkdir -p _externals/irrlicht/lib/Win64-gcc
+	cp -r $TOP/external/irrlicht/* _externals/irrlicht/
+	cd _externals/irrlicht/source/Irrlicht/
 	sed -i 's/Win32-gcc/Win64-gcc/g' Makefile Irrlicht-gcc.cbp Irrlicht.dev
 	sed -i 's/ld3dx9d/ld3dx9_43/g' Makefile
 	sed -i 's/-DNO_IRR_COMPILE_WITH_DIRECT3D_9_//' Makefile
@@ -79,9 +79,9 @@ cmake .. \
 	-DENABLE_FREETYPE=1 \
 	-DENABLE_LEVELDB=1 \
 	\
-	-DIRRLICHT_INCLUDE_DIR=$topdir/_externals/irrlicht-$irrlicht_version/include \
-	-DIRRLICHT_LIBRARY=$topdir/_externals/irrlicht-$irrlicht_version/lib/Win64-gcc/libIrrlicht.a \
-	-DIRRLICHT_DLL=$topdir/_externals/irrlicht-$irrlicht_version/bin/Win64-gcc/Irrlicht.dll \
+	-DIRRLICHT_INCLUDE_DIR=$topdir/_externals/irrlicht/include \
+	-DIRRLICHT_LIBRARY=$topdir/_externals/irrlicht/lib/Win64-gcc/libIrrlicht.a \
+	-DIRRLICHT_DLL=$topdir/_externals/irrlicht/bin/Win64-gcc/Irrlicht.dll \
 	\
 	-DZLIB_INCLUDE_DIR=$libdir/zlib/include \
 	-DZLIB_LIBRARIES=$libdir/zlib/lib/libz.dll.a \
