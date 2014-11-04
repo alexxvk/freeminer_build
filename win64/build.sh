@@ -18,14 +18,6 @@ else
 fi
 . $hostdir/env.sh
 
-# Get minetest_game
-#cd $topdir/games
-#[ -d minetest_game ] && /usr/bin/rm -rf minetest_game
-#wget https://github.com/minetest/minetest_game/archive/master.zip
-#unzip master.zip
-#rm master.zip
-#mv minetest_game-master minetest_game
-
 #Build dependancies
 # irrlicht
 cd $topdir
