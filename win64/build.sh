@@ -5,8 +5,9 @@ parallel=`grep -c ^processor /proc/cpuinfo`
 host=`head -1 /etc/issue`
 
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-topdir=$dir/../../minetest
 TOP=$dir/../..
+OUT=$TOP/out/win64/
+[[ ! -d $OUT ]] && mkdir -p $OUT
 libdir=$dir/externals
 
 if [[ "Fedora release 20 (Heisenbug)" == "$host" ]]
@@ -20,7 +21,7 @@ fi
 
 #Build dependancies
 # irrlicht
-cd $topdir
+cd $OUT
 if [ ! -f "_externals/irrlicht/bin/Win64-gcc/Irrlicht.dll" ]
 then
 	mkdir -p _externals/irrlicht/bin/Win64-gcc
@@ -37,7 +38,7 @@ then
 fi
 
 #leveldb
-cd $topdir
+cd $OUT
 if [ ! -f "_externals/leveldb/bin/libleveldb.dll" ]
 then
 	mkdir -p _externals/leveldb/bin/
@@ -51,12 +52,13 @@ then
 fi
 
 # Build the thing
-cd $topdir
+cd $TOP/minetest
 git_hash=`git show | head -c14 | tail -c7`
+cd $OUT
 [ -d _build ] && rm -Rf _build/
 mkdir _build
 cd _build
-cmake .. \
+cmake $TOP/minetest \
 	-DCMAKE_TOOLCHAIN_FILE=$toolchain_file \
 	-DCMAKE_INSTALL_PREFIX=/tmp \
 	-DVERSION_EXTRA=$git_hash \
@@ -68,9 +70,9 @@ cmake .. \
 	-DENABLE_FREETYPE=1 \
 	-DENABLE_LEVELDB=1 \
 	\
-	-DIRRLICHT_INCLUDE_DIR=$topdir/_externals/irrlicht/include \
-	-DIRRLICHT_LIBRARY=$topdir/_externals/irrlicht/lib/Win64-gcc/libIrrlicht.a \
-	-DIRRLICHT_DLL=$topdir/_externals/irrlicht/bin/Win64-gcc/Irrlicht.dll \
+	-DIRRLICHT_INCLUDE_DIR=$OUT/_externals/irrlicht/include \
+	-DIRRLICHT_LIBRARY=$OUT/_externals/irrlicht/lib/Win64-gcc/libIrrlicht.a \
+	-DIRRLICHT_DLL=$OUT/_externals/irrlicht/bin/Win64-gcc/Irrlicht.dll \
 	\
 	-DZLIB_INCLUDE_DIR=$libdir/zlib/include \
 	-DZLIB_LIBRARIES=$libdir/zlib/lib/libz.dll.a \
@@ -102,9 +104,9 @@ cmake .. \
 	-DFREETYPE_LIBRARY=$libdir/freetype/lib/libfreetype.dll.a \
 	-DFREETYPE_DLL=$libdir/freetype/bin/libfreetype-6.dll \
 	\
-	-DLEVELDB_INCLUDE_DIR=$topdir/_externals/leveldb/include \
-	-DLEVELDB_LIBRARY=$topdir/_externals/leveldb/lib/libleveldb.dll.a \
-	-DLEVELDB_DLL=$topdir/_externals/leveldb/bin/libleveldb.dll \
+	-DLEVELDB_INCLUDE_DIR=$OUT/_externals/leveldb/include \
+	-DLEVELDB_LIBRARY=$OUT/_externals/leveldb/lib/libleveldb.dll.a \
+	-DLEVELDB_DLL=$OUT/_externals/leveldb/bin/libleveldb.dll \
 	\
 	-DCUSTOM_GETTEXT_PATH=$libdir/gettext \
 	-DGETTEXT_MSGFMT=`which msgfmt` \
