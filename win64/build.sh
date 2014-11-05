@@ -108,12 +108,12 @@ cmake $TOP/minetest \
 	-DLEVELDB_LIBRARY=$OUT/_externals/leveldb/lib/libleveldb.dll.a \
 	-DLEVELDB_DLL=$OUT/_externals/leveldb/bin/libleveldb.dll \
 	\
-	-DCUSTOM_GETTEXT_PATH=$libdir/gettext \
+	-DCUSTOM_GETTEXT_PATH=/usr/x86_64-w64-mingw32/sys-root/mingw \
 	-DGETTEXT_MSGFMT=`which msgfmt` \
-	-DGETTEXT_DLL=$libdir/gettext/bin/libintl-8.dll \
-	-DGETTEXT_ICONV_DLL=$libdir/gettext/bin/libiconv-2.dll \
-	-DGETTEXT_INCLUDE_DIR=$libdir/gettext/include \
-	-DGETTEXT_LIBRARY=$libdir/gettext/lib/libintl.dll.a
+	-DGETTEXT_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libintl-8.dll \
+	-DGETTEXT_ICONV_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/iconv.dll \
+	-DGETTEXT_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
+	-DGETTEXT_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libintl.dll.a
 
 make package -j$parallel
 
