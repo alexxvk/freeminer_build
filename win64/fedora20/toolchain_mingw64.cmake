@@ -17,6 +17,7 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 set( Mingw_Path /usr/x86_64-w64-mingw32/sys-root/mingw/bin/)
-set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${Mingw_Path}/libgcc_s_seh-1.dll ${Mingw_Path}/libstdc++-6.dll )
+# We need libbz2-1.dll, libpng16-16.dll to use fedora freetype.dll
+set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${Mingw_Path}/libgcc_s_seh-1.dll ${Mingw_Path}/libstdc++-6.dll ${Mingw_Path}/libbz2-1.dll ${Mingw_Path}/libpng16-16.dll)
 
 

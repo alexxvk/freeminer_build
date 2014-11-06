@@ -15,7 +15,8 @@ then
 	toolchain_file=$dir/fedora20/toolchain_mingw64.cmake
 	hostdir=$dir/fedora20/
 else
-	toolchain_file=$dir/toolchain_mingw64.cmake
+	echo "Don't know how to build windows 64 build in $host"
+	exit
 fi
 . $hostdir/env.sh
 
@@ -99,10 +100,10 @@ cmake $TOP/minetest \
 	-DCURL_INCLUDE_DIR=$libdir/libcurl/include \
 	-DCURL_LIBRARY=$libdir/libcurl/lib/libcurl.dll.a \
 	\
-	-DFREETYPE_INCLUDE_DIR_freetype2=$libdir/freetype/include/freetype2 \
-	-DFREETYPE_INCLUDE_DIR_ft2build=$libdir/freetype/include/freetype2 \
-	-DFREETYPE_LIBRARY=$libdir/freetype/lib/libfreetype.dll.a \
-	-DFREETYPE_DLL=$libdir/freetype/bin/libfreetype-6.dll \
+	-DFREETYPE_INCLUDE_DIR_freetype2=/usr/x86_64-w64-mingw32/sys-root/mingw/include/\
+	-DFREETYPE_INCLUDE_DIR_ft2build=/usr/x86_64-w64-mingw32/sys-root/mingw/include/freetype2/\
+	-DFREETYPE_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libfreetype.dll.a \
+	-DFREETYPE_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libfreetype-6.dll \
 	\
 	-DLEVELDB_INCLUDE_DIR=$OUT/_externals/leveldb/include \
 	-DLEVELDB_LIBRARY=$OUT/_externals/leveldb/lib/libleveldb.dll.a \
