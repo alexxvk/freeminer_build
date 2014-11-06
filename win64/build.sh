@@ -82,15 +82,15 @@ cmake $TOP/minetest \
 	-DLUA_INCLUDE_DIR=$libdir/luajit/include \
 	-DLUA_LIBRARY=$libdir/luajit/libluajit.a \
 	\
-	-DOGG_INCLUDE_DIR=$libdir/libogg/include \
-	-DOGG_LIBRARY=$libdir/libogg/lib/libogg.dll.a \
-	-DOGG_DLL=$libdir/libogg/bin/libogg-0.dll \
+	-DOGG_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
+	-DOGG_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libogg.dll.a \
+	-DOGG_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libogg-0.dll \
 	\
-	-DVORBIS_INCLUDE_DIR=$libdir/libvorbis/include \
-	-DVORBIS_LIBRARY=$libdir/libvorbis/lib/libvorbis.dll.a \
-	-DVORBIS_DLL=$libdir/libvorbis/bin/libvorbis-0.dll \
-	-DVORBISFILE_LIBRARY=$libdir/libvorbis/lib/libvorbisfile.dll.a \
-	-DVORBISFILE_DLL=$libdir/libvorbis/bin/libvorbisfile-3.dll \
+	-DVORBIS_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
+	-DVORBIS_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libvorbis.dll.a \
+	-DVORBIS_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libvorbis-0.dll \
+	-DVORBISFILE_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libvorbisfile.dll.a \
+	-DVORBISFILE_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libvorbisfile-3.dll \
 	\
 	-DOPENAL_INCLUDE_DIR=$libdir/openal_stripped/include/AL \
 	-DOPENAL_LIBRARY=$libdir/openal_stripped/lib/libOpenAL32.dll.a \
