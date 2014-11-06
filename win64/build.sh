@@ -52,6 +52,16 @@ then
 	mv libleveldb.dll bin/
 fi
 
+#LuaJIT
+cd $OUT
+if [ ! -f "_externals/luajit/src/lua51.dll" ]
+then
+	mkdir -p _externals/luajit
+	cp -r $TOP/external/LuaJIT/* _externals/luajit/
+	cd _externals/luajit
+	make CROSS=x86_64-w64-mingw32- TARGET_SYS=Windows
+fi
+
 # Build the thing
 cd $TOP/minetest
 git_hash=`git show | head -c14 | tail -c7`
@@ -79,8 +89,8 @@ cmake $TOP/minetest \
 	-DZLIB_LIBRARIES=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libz.dll.a \
 	-DZLIB_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/zlib1.dll \
 	\
-	-DLUA_INCLUDE_DIR=$libdir/luajit/include \
-	-DLUA_LIBRARY=$libdir/luajit/libluajit.a \
+	-DLUA_INCLUDE_DIR=$OUT/_externals/luajit/src \
+	-DLUA_LIBRARY=$OUT/_externals/luajit/src/lua51.dll \
 	\
 	-DOGG_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
 	-DOGG_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libogg.dll.a \
