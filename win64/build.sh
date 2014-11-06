@@ -96,9 +96,9 @@ cmake $TOP/minetest \
 	-DOPENAL_LIBRARY=$libdir/openal_stripped/lib/libOpenAL32.dll.a \
 	-DOPENAL_DLL=$libdir/openal_stripped/bin/OpenAL32.dll \
 	\
-	-DCURL_DLL=$libdir/libcurl/bin/libcurl-4.dll \
-	-DCURL_INCLUDE_DIR=$libdir/libcurl/include \
-	-DCURL_LIBRARY=$libdir/libcurl/lib/libcurl.dll.a \
+	-DCURL_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libcurl-4.dll \
+	-DCURL_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
+	-DCURL_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libcurl.dll.a \
 	\
 	-DFREETYPE_INCLUDE_DIR_freetype2=/usr/x86_64-w64-mingw32/sys-root/mingw/include/\
 	-DFREETYPE_INCLUDE_DIR_ft2build=/usr/x86_64-w64-mingw32/sys-root/mingw/include/freetype2/\
