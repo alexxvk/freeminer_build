@@ -62,6 +62,17 @@ then
 	make CROSS=x86_64-w64-mingw32- TARGET_SYS=Windows
 fi
 
+#OpenAL-soft
+cd $OUT
+if [ ! -f "_externals/openal-soft/OpenAL32.dll" ]
+then
+	mkdir -p _externals/openal-soft
+	cd _externals/openal-soft
+	cmake $TOP/external/openal-soft/ \
+		-DCMAKE_TOOLCHAIN_FILE=$toolchain_file
+	make
+fi
+
 # Build the thing
 cd $TOP/minetest
 git_hash=`git show | head -c14 | tail -c7`
@@ -102,9 +113,9 @@ cmake $TOP/minetest \
 	-DVORBISFILE_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libvorbisfile.dll.a \
 	-DVORBISFILE_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libvorbisfile-3.dll \
 	\
-	-DOPENAL_INCLUDE_DIR=$libdir/openal_stripped/include/AL \
-	-DOPENAL_LIBRARY=$libdir/openal_stripped/lib/libOpenAL32.dll.a \
-	-DOPENAL_DLL=$libdir/openal_stripped/bin/OpenAL32.dll \
+	-DOPENAL_INCLUDE_DIR=$TOP/external/openal-soft/include/AL \
+	-DOPENAL_LIBRARY=$OUT/_externals/openal-soft/libOpenAL32.dll.a \
+	-DOPENAL_DLL=$OUT/_externals/openal-soft/OpenAL32.dll \
 	\
 	-DCURL_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libcurl-4.dll \
 	-DCURL_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
