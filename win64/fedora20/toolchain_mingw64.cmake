@@ -20,6 +20,7 @@ set( Mingw_Path /usr/x86_64-w64-mingw32/sys-root/mingw/bin/)
 # We need libbz2-1.dll, libpng16-16.dll to use fedora freetype.dll
 # We need libcrypto-10.dll, libidn-11.dll, libssh2-1.dll, libssl-10.dll
 # to use fedora curl
-set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${Mingw_Path}/libgcc_s_seh-1.dll ${Mingw_Path}/libstdc++-6.dll ${Mingw_Path}/libbz2-1.dll ${Mingw_Path}/libpng16-16.dll ${Mingw_Path}/libcrypto-10.dll ${Mingw_Path}/libidn-11.dll ${Mingw_Path}/libssh2-1.dll ${Mingw_Path}/libssl-10.dll)
+# LUA_LIBRARY is here now but will be removed later
+set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${Mingw_Path}/libgcc_s_seh-1.dll ${Mingw_Path}/libstdc++-6.dll ${Mingw_Path}/libbz2-1.dll ${Mingw_Path}/libpng16-16.dll ${Mingw_Path}/libcrypto-10.dll ${Mingw_Path}/libidn-11.dll ${Mingw_Path}/libssh2-1.dll ${Mingw_Path}/libssl-10.dll ${LUA_LIBRARY})
 
 
