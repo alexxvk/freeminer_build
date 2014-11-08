@@ -4,7 +4,7 @@ set -e
 parallel=`grep -c ^processor /proc/cpuinfo`
 host=`head -1 /etc/issue`
 
-dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOP=$dir/../..
 OUT=$TOP/out/win64/
 [[ ! -d $OUT ]] && mkdir -p $OUT
