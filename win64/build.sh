@@ -14,6 +14,10 @@ if [[ "Fedora release 20 (Heisenbug)" == "$host" ]]
 then
 	toolchain_file=$dir/fedora20/toolchain_mingw64.cmake
 	hostdir=$dir/fedora20/
+elif [[ "Fedora release 21 (Twenty One)" == "$host" ]]
+then
+	toolchain_file=$dir/fedora21/toolchain_mingw64.cmake
+	hostdir=$dir/fedora20/
 else
 	echo "Don't know how to build windows 64 build in $host"
 	exit
