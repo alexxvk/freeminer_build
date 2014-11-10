@@ -17,24 +17,20 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-cmake_minimum_required(VERSION 2.6)
-if(${CMAKE_VERSION} STREQUAL "2.8.2")
-	# bug http://vtk.org/Bug/view.php?id=11020
-	message( WARNING "CMake/CPack version 2.8.2 will not create working .deb packages!")
-endif(${CMAKE_VERSION} STREQUAL "2.8.2")
+find_package(ZLIB)
+if(ZLIB_FOUND)
+	set(ZLIB_INCLUDE_DIR "${ZLIB_INCLUDE_DIR}"
+			CACHE PATH "Zlib include directory")
+	set(ZLIB_LIBRARIES "${ZLIB_LIBRARIES}"
+			CACHE FILEPATH "Path to zlibwapi.lib")
 
-SET(TOP_DIR $ENV{TOP})
-SET(OUT_DIR $ENV{OUT})
+	if(WIN32)
+		find_file(ZLIB_DLL zlib1.dll ${ZLIB_ROOT})
+		set(ZLIB_DLL "${ZLIB_DLL}"
+				CACHE FILEPATH "Path to zlibwapi.dll (for installation)")
+	endif()
+	add_license_dir(/usr/share/licenses/zlib/README zlib)
+else()
+	#We need to build it ourself
+endif()
 
-SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
-
-include(license)
-include(zlib)
-
-# Minetest itself
-set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
-set(CMAKE_SOURCE_DIR ${TOP_DIR}/minetest)
-add_subdirectory(${TOP_DIR}/minetest ${OUT_DIR}/_minetest)
-set(CMAKE_SOURCE_DIR ${SAVE_CMAKE_SOURCE_DIR})
-
-include(installation)

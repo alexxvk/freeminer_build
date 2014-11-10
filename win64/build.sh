@@ -120,10 +120,6 @@ cmake $TOP/build \
 	-DIRRLICHT_LIBRARY=$OUT/_externals/irrlicht/lib/Win64-gcc/libIrrlicht.a \
 	-DIRRLICHT_DLL=$OUT/_externals/irrlicht/bin/Win64-gcc/Irrlicht.dll \
 	\
-	-DZLIB_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
-	-DZLIB_LIBRARIES=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libz.dll.a \
-	-DZLIB_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/zlib1.dll \
-	\
 	-DLUA_INCLUDE_DIR=$OUT/_externals/luajit/src \
 	-DLUA_LIBRARY=$OUT/_externals/luajit/src/lua51.dll \
 	\
