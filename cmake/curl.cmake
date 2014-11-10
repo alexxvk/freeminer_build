@@ -17,25 +17,13 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-cmake_minimum_required(VERSION 2.6)
-if(${CMAKE_VERSION} STREQUAL "2.8.2")
-	# bug http://vtk.org/Bug/view.php?id=11020
-	message( WARNING "CMake/CPack version 2.8.2 will not create working .deb packages!")
-endif(${CMAKE_VERSION} STREQUAL "2.8.2")
+find_package(CURL)
+if(CURL_FOUND)
+	if(WIN32)
+		find_file(CURL_DLL libcurl-4.dll)
+	endif()
+	add_license_dir(/usr/share/licenses/libcurl/COPYING libcurl)
+else()
+	#We need to build it ourself
+endif()
 
-SET(TOP_DIR $ENV{TOP})
-SET(OUT_DIR $ENV{OUT})
-
-SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
-
-include(license)
-include(zlib)
-include(curl)
-
-# Minetest itself
-set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
-set(CMAKE_SOURCE_DIR ${TOP_DIR}/minetest)
-add_subdirectory(${TOP_DIR}/minetest ${OUT_DIR}/_minetest)
-set(CMAKE_SOURCE_DIR ${SAVE_CMAKE_SOURCE_DIR})
-
-include(installation)

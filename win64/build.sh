@@ -137,10 +137,6 @@ cmake $TOP/build \
 	-DOPENAL_LIBRARY=$OUT/_externals/openal-soft/libOpenAL32.dll.a \
 	-DOPENAL_DLL=$OUT/_externals/openal-soft/OpenAL32.dll \
 	\
-	-DCURL_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libcurl-4.dll \
-	-DCURL_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
-	-DCURL_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libcurl.dll.a \
-	\
 	-DFREETYPE_INCLUDE_DIR_freetype2=/usr/x86_64-w64-mingw32/sys-root/mingw/include/\
 	-DFREETYPE_INCLUDE_DIR_ft2build=/usr/x86_64-w64-mingw32/sys-root/mingw/include/freetype2/\
 	-DFREETYPE_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libfreetype.dll.a \
