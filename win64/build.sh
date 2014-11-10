@@ -24,8 +24,8 @@ parallel=`grep -c ^processor /proc/cpuinfo`
 host=`head -1 /etc/issue`
 
 export dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-TOP=$dir/../..
-OUT=$TOP/out/win64/
+export TOP=$dir/../..
+export OUT=$TOP/out/win64/
 [[ ! -d $OUT ]] && mkdir -p $OUT
 libdir=$dir/externals
 
@@ -101,9 +101,10 @@ cd $TOP/minetest
 git_hash=`git show | head -c14 | tail -c7`
 cd $OUT
 [ -d _build ] && rm -Rf _build/
+[ -d _minetest ] && rm -Rf _minetest/
 mkdir _build
 cd _build
-cmake $TOP/minetest \
+cmake $TOP/build \
 	-DCMAKE_TOOLCHAIN_FILE=$toolchain_file \
 	-DCMAKE_INSTALL_PREFIX=/tmp \
 	-DVERSION_EXTRA=$git_hash \
