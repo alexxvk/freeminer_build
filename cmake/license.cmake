@@ -17,23 +17,13 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-cmake_minimum_required(VERSION 2.6)
-if(${CMAKE_VERSION} STREQUAL "2.8.2")
-	# bug http://vtk.org/Bug/view.php?id=11020
-	message( WARNING "CMake/CPack version 2.8.2 will not create working .deb packages!")
-endif(${CMAKE_VERSION} STREQUAL "2.8.2")
+function(add_license_file licenseFile)
+	set(LICENSE_FILES ${LICENSE_FILES} ${licenseFile} PARENT_SCOPE)
+endfunction(add_license_file)
 
-SET(TOP_DIR $ENV{TOP})
-SET(OUT_DIR $ENV{OUT})
+function(add_license_dir licenseFile dir)
+	set(LICENSE_DIR ${LICENSE_DIR} "${licenseFile}:${dir}" PARENT_SCOPE)
+endfunction(add_license_dir)
 
-SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
-
-include(license)
-
-# Minetest itself
-set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
-set(CMAKE_SOURCE_DIR ${TOP_DIR}/minetest)
-add_subdirectory(${TOP_DIR}/minetest ${OUT_DIR}/_minetest)
-set(CMAKE_SOURCE_DIR ${SAVE_CMAKE_SOURCE_DIR})
-
-include(installation)
+add_license_file(${TOP_DIR}/minetest/doc/lgpl-2.1.txt)
+add_license_file(${TOP_DIR}/build/gpl-2.0.txt)
