@@ -26,7 +26,7 @@ SET(CMAKE_CXX_COMPILER /usr/bin/x86_64-w64-mingw32-g++)
 SET(CMAKE_RC_COMPILER /usr/bin/x86_64-w64-mingw32-windres)
 
 # here is the target environment located
-SET(CMAKE_FIND_ROOT_PATH /usr/x86_64-w64-mingw32)
+SET(CMAKE_FIND_ROOT_PATH /usr/x86_64-w64-mingw32/sys-root/mingw)
 
 # adjust the default behaviour of the FIND_XXX() commands:
 # search headers and libraries in the target environment, search
@@ -40,6 +40,5 @@ set( Mingw_Path /usr/x86_64-w64-mingw32/sys-root/mingw/bin/)
 # We need libcrypto-10.dll, libidn-11.dll, libssh2-1.dll, libssl-10.dll
 # to use fedora curl
 # LUA_LIBRARY is here now but will be removed later
-set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${Mingw_Path}/libgcc_s_seh-1.dll ${Mingw_Path}/libstdc++-6.dll ${Mingw_Path}/libbz2-1.dll ${Mingw_Path}/libpng16-16.dll ${Mingw_Path}/libcrypto-10.dll ${Mingw_Path}/libidn-11.dll ${Mingw_Path}/libssh2-1.dll ${Mingw_Path}/libssl-10.dll ${LUA_LIBRARY})
-
+set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${Mingw_Path}/libgcc_s_seh-1.dll ${Mingw_Path}/libstdc++-6.dll ${Mingw_Path}/libbz2-1.dll ${Mingw_Path}/libpng16-16.dll ${Mingw_Path}/libcrypto-10.dll ${Mingw_Path}/libidn-11.dll ${Mingw_Path}/libssh2-1.dll ${Mingw_Path}/libssl-10.dll ${LUA_LIBRARY} ${Mingw_Path}/libsqlite3-0.dll)
 
