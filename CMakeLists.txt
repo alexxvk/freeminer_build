@@ -25,7 +25,7 @@ endif(${CMAKE_VERSION} STREQUAL "2.8.2")
 
 SET(TOP_DIR $ENV{TOP})
 SET(OUT_DIR $ENV{OUT})
-SET(SRC_DIR $ENV{TOP}/minetest)
+SET(SRC_DIR $ENV{TOP}/freeminer)
 
 SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
 
@@ -37,7 +37,7 @@ include(ogg)
 # Minetest itself
 set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
 set(CMAKE_SOURCE_DIR ${SRC_DIR})
-add_subdirectory(${SRC_DIR} ${OUT_DIR}/_minetest)
+add_subdirectory(${SRC_DIR} ${OUT_DIR}/_freeminer)
 set(CMAKE_SOURCE_DIR ${SAVE_CMAKE_SOURCE_DIR})
 
 include(installation)

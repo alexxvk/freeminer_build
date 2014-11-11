@@ -25,5 +25,4 @@ function(add_license_dir licenseFile dir)
 	set(LICENSE_DIR ${LICENSE_DIR} "${licenseFile}:${dir}" PARENT_SCOPE)
 endfunction(add_license_dir)
 
-add_license_file(${SRC_DIR}/doc/lgpl-2.1.txt)
-add_license_file(${TOP_DIR}/build/gpl-2.0.txt)
+add_license_file(${SRC_DIR}/COPYING)

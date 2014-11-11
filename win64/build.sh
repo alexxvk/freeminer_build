@@ -97,7 +97,7 @@ then
 fi
 
 # Build the thing
-cd $TOP/minetest
+cd $TOP/freeminer
 git_hash=`git show | head -c14 | tail -c7`
 cd $OUT
 [ ! -d _build ] && mkdir _build
