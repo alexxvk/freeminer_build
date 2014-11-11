@@ -17,6 +17,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
+# TODO use the irrlicht one
 find_package(ZLIB)
 if(ZLIB_FOUND)
 	set(ZLIB_INCLUDE_DIR "${ZLIB_INCLUDE_DIR}"
