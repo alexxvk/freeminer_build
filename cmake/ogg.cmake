@@ -19,6 +19,6 @@
 
 set(OGG_INCLUDE_DIR /usr/x86_64-w64-mingw32/sys-root/mingw/include PARENT_SCOPE)
 set(OGG_LIBRARY /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libogg.dll.a PARENT_SCOPE)
-set(OGG_DLL /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libogg-0.dll PARENT_SCOPE)
+set(OGG_DLL /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libogg-0.dll CACHE FILEPATH "Path to libogg.dll for installation (optional)")
 add_license_dir(/usr/share/doc/libogg/COPYING libogg)
 
