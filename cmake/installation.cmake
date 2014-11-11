@@ -24,16 +24,19 @@ get_directory_property(BINDIR DIRECTORY ${TOP_DIR}/minetest
 get_directory_property(DOCDIR DIRECTORY ${TOP_DIR}/minetest
                        DEFINITION DOCDIR)
 
+# We install games
 install(DIRECTORY "${TOP_DIR}/minetest/games" DESTINATION "${SHAREDIR}"
 	PATTERN ".git" EXCLUDE
 	PATTERN ".gitignore" EXCLUDE)
 
+# We install windows runtime
 if(WIN32)
 	if(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS)
 		install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION ${BINDIR})
 	endif()
 endif()
 
+# Licenses
 install(FILES ${LICENSE_FILES} DESTINATION ${DOCDIR})
 
 foreach(var ${LICENSE_DIR})
@@ -43,3 +46,8 @@ foreach(var ${LICENSE_DIR})
 	list(GET var2 1 license_dir)
 	install(FILES ${license_file} DESTINATION ${DOCDIR}/${license_dir})
 endforeach(var)
+
+# Manifest
+execute_process(COMMAND repo manifest -r -o ${OUT_DIR}/manifest.xml)
+install(FILES ${OUT_DIR}/manifest.xml DESTINATION ${DOCDIR})
+
