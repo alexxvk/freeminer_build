@@ -25,7 +25,7 @@ if(ZLIB_FOUND)
 			CACHE FILEPATH "Path to zlibwapi.lib")
 
 	if(WIN32)
-		find_file(ZLIB_DLL zlib1.dll ${ZLIB_ROOT})
+		find_file(ZLIB_DLL zlib1.dll)
 		set(ZLIB_DLL "${ZLIB_DLL}"
 				CACHE FILEPATH "Path to zlibwapi.dll (for installation)")
 	endif()
