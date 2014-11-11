@@ -100,9 +100,7 @@ fi
 cd $TOP/minetest
 git_hash=`git show | head -c14 | tail -c7`
 cd $OUT
-[ -d _build ] && rm -Rf _build/
-[ -d _minetest ] && rm -Rf _minetest/
-mkdir _build
+[ ! -d _build ] && mkdir _build
 cd _build
 cmake $TOP/build \
 	-DCMAKE_TOOLCHAIN_FILE=$toolchain_file \
@@ -122,10 +120,6 @@ cmake $TOP/build \
 	\
 	-DLUA_INCLUDE_DIR=$OUT/_externals/luajit/src \
 	-DLUA_LIBRARY=$OUT/_externals/luajit/src/lua51.dll \
-	\
-	-DOGG_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
-	-DOGG_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libogg.dll.a \
-	-DOGG_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libogg-0.dll \
 	\
 	-DVORBIS_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
 	-DVORBIS_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libvorbis.dll.a \

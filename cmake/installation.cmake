@@ -17,15 +17,15 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-get_directory_property(SHAREDIR DIRECTORY ${TOP_DIR}/minetest
+get_directory_property(SHAREDIR DIRECTORY ${SRC_DIR}
                        DEFINITION SHAREDIR)
-get_directory_property(BINDIR DIRECTORY ${TOP_DIR}/minetest
+get_directory_property(BINDIR DIRECTORY ${SRC_DIR}
                        DEFINITION BINDIR)
-get_directory_property(DOCDIR DIRECTORY ${TOP_DIR}/minetest
+get_directory_property(DOCDIR DIRECTORY ${SRC_DIR}
                        DEFINITION DOCDIR)
 
 # We install games
-install(DIRECTORY "${TOP_DIR}/minetest/games" DESTINATION "${SHAREDIR}"
+install(DIRECTORY "${SRC_DIR}/games" DESTINATION "${SHAREDIR}"
 	PATTERN ".git" EXCLUDE
 	PATTERN ".gitignore" EXCLUDE)
 

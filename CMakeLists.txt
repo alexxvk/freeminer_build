@@ -25,6 +25,7 @@ endif(${CMAKE_VERSION} STREQUAL "2.8.2")
 
 SET(TOP_DIR $ENV{TOP})
 SET(OUT_DIR $ENV{OUT})
+SET(SRC_DIR $ENV{TOP}/minetest)
 
 SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
 
@@ -34,8 +35,8 @@ include(curl)
 
 # Minetest itself
 set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
-set(CMAKE_SOURCE_DIR ${TOP_DIR}/minetest)
-add_subdirectory(${TOP_DIR}/minetest ${OUT_DIR}/_minetest)
+set(CMAKE_SOURCE_DIR ${SRC_DIR})
+add_subdirectory(${SRC_DIR} ${OUT_DIR}/_minetest)
 set(CMAKE_SOURCE_DIR ${SAVE_CMAKE_SOURCE_DIR})
 
 include(installation)
