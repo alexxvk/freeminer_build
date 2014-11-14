@@ -44,23 +44,6 @@ fi
 . $hostdir/env.sh
 
 #Build dependancies
-# irrlicht
-cd $OUT
-if [ ! -f "_externals/irrlicht/bin/Win64-gcc/Irrlicht.dll" ]
-then
-	mkdir -p _externals/irrlicht/bin/Win64-gcc
-	mkdir -p _externals/irrlicht/lib/Win64-gcc
-	cp -r $TOP/external/irrlicht/* _externals/irrlicht/
-	cd _externals/irrlicht/source/Irrlicht/
-	sed -i 's/Win32-gcc/Win64-gcc/g' Makefile Irrlicht-gcc.cbp Irrlicht.dev
-	sed -i 's/ld3dx9d/ld3dx9_43/g' Makefile
-	sed -i 's/-DNO_IRR_COMPILE_WITH_DIRECT3D_9_//' Makefile
-	# BUG in d3d9.h (mingw64)
-	# http://sourceforge.net/p/mingw-w64/bugs/409/
-	sed -i 's/D3DPRESENT_LINEAR_CONTENT/0x00000002L/g' CD3D9Driver.cpp
-	make win32
-fi
-
 #leveldb
 cd $OUT
 if [ ! -f "_externals/leveldb/bin/libleveldb.dll" ]
@@ -113,10 +96,6 @@ cmake $TOP/build \
 	-DENABLE_GETTEXT=1 \
 	-DENABLE_FREETYPE=1 \
 	-DENABLE_LEVELDB=1 \
-	\
-	-DIRRLICHT_INCLUDE_DIR=$OUT/_externals/irrlicht/include \
-	-DIRRLICHT_LIBRARY=$OUT/_externals/irrlicht/lib/Win64-gcc/libIrrlicht.a \
-	-DIRRLICHT_DLL=$OUT/_externals/irrlicht/bin/Win64-gcc/Irrlicht.dll \
 	\
 	-DLUA_INCLUDE_DIR=$OUT/_externals/luajit/src \
 	-DLUA_LIBRARY=$OUT/_externals/luajit/src/lua51.dll \

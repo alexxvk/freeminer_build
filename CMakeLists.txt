@@ -34,6 +34,8 @@ include(zlib)
 include(curl)
 include(ogg)
 
+include(irrlicht)
+
 # Minetest itself
 set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
 set(CMAKE_SOURCE_DIR ${SRC_DIR})
