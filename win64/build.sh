@@ -44,20 +44,6 @@ fi
 . $hostdir/env.sh
 
 #Build dependancies
-#leveldb
-cd $OUT
-if [ ! -f "_externals/leveldb/bin/libleveldb.dll" ]
-then
-	mkdir -p _externals/leveldb/bin/
-	mkdir -p _externals/leveldb/lib/
-	cp -r $TOP/external/leveldb/* _externals/leveldb/
-	cd _externals/leveldb/
-	TARGET_OS=OS_WINDOWS_CROSSCOMPILE CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ AR=x86_64-w64-mingw32-ar \
-        make libleveldb.a libleveldb.dll
-	mv libleveldb.a libleveldb.dll.a lib/
-	mv libleveldb.dll bin/
-fi
-
 #LuaJIT
 cd $OUT
 if [ ! -f "_externals/luajit/src/lua51.dll" ]
@@ -114,10 +100,6 @@ cmake $TOP/build \
 	-DFREETYPE_INCLUDE_DIR_ft2build=/usr/x86_64-w64-mingw32/sys-root/mingw/include/freetype2/\
 	-DFREETYPE_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libfreetype.dll.a \
 	-DFREETYPE_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libfreetype-6.dll \
-	\
-	-DLEVELDB_INCLUDE_DIR=$OUT/_externals/leveldb/include \
-	-DLEVELDB_LIBRARY=$OUT/_externals/leveldb/lib/libleveldb.dll.a \
-	-DLEVELDB_DLL=$OUT/_externals/leveldb/bin/libleveldb.dll \
 	\
 	-DCUSTOM_GETTEXT_PATH=/usr/x86_64-w64-mingw32/sys-root/mingw \
 	-DGETTEXT_MSGFMT=`which msgfmt` \
