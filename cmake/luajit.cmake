@@ -16,36 +16,18 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
+include(ExternalProject)
+ExternalProject_Add(luajit
+	SOURCE_DIR "${TOP_DIR}/external/LuaJIT"
+	CONFIGURE_COMMAND cp -r <SOURCE_DIR> ${OUT_DIR}/_external/
+	BINARY_DIR "${OUT_DIR}/_external/LuaJIT"
+	BUILD_COMMAND make CROSS=x86_64-w64-mingw32- TARGET_SYS=Windows
+	BUILD_IN_SOURCE 0
+	INSTALL_COMMAND ""
+	TEST_COMMAND ""
+	LOG_BUILD OFF)
+	
+set(LUA_INCLUDE_DIR ${OUT_DIR}/_external/LuaJIT/src)
+set(LUA_LIBRARY ${OUT_DIR}/_external/LuaJIT/src/lua51.dll)
 
-cmake_minimum_required(VERSION 2.6)
-if(${CMAKE_VERSION} STREQUAL "2.8.2")
-	# bug http://vtk.org/Bug/view.php?id=11020
-	message( WARNING "CMake/CPack version 2.8.2 will not create working .deb packages!")
-endif(${CMAKE_VERSION} STREQUAL "2.8.2")
-
-#set(CMAKE_VERBOSE_MAKEFILE ON)
-
-SET(TOP_DIR $ENV{TOP})
-SET(OUT_DIR $ENV{OUT})
-SET(SRC_DIR $ENV{TOP}/minetest)
-
-SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
-
-include(license)
-include(zlib)
-include(curl)
-include(ogg)
-
-include(irrlicht)
-if(ENABLE_LEVELDB)
-	include(leveldb)
-endif()
-include(luajit)
-
-# Minetest itself
-set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
-set(CMAKE_SOURCE_DIR ${SRC_DIR})
-add_subdirectory(${SRC_DIR} ${OUT_DIR}/_minetest)
-set(CMAKE_SOURCE_DIR ${SAVE_CMAKE_SOURCE_DIR})
-
-include(installation)
+add_license_dir(${TOP_DIR}/external/LuaJIT/COPYRIGHT LuaJIT)

@@ -44,16 +44,6 @@ fi
 . $hostdir/env.sh
 
 #Build dependancies
-#LuaJIT
-cd $OUT
-if [ ! -f "_externals/luajit/src/lua51.dll" ]
-then
-	mkdir -p _externals/luajit
-	cp -r $TOP/external/LuaJIT/* _externals/luajit/
-	cd _externals/luajit
-	make CROSS=x86_64-w64-mingw32- TARGET_SYS=Windows
-fi
-
 #OpenAL-soft
 cd $OUT
 if [ ! -f "_externals/openal-soft/OpenAL32.dll" ]
@@ -82,9 +72,6 @@ cmake $TOP/build \
 	-DENABLE_GETTEXT=1 \
 	-DENABLE_FREETYPE=1 \
 	-DENABLE_LEVELDB=1 \
-	\
-	-DLUA_INCLUDE_DIR=$OUT/_externals/luajit/src \
-	-DLUA_LIBRARY=$OUT/_externals/luajit/src/lua51.dll \
 	\
 	-DVORBIS_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
 	-DVORBIS_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libvorbis.dll.a \
