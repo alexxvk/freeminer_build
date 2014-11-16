@@ -30,10 +30,10 @@ export OUT=$TOP/out/win64/
 
 if [[ "Fedora release 20 (Heisenbug)" == "$host" ]]
 then
-	toolchain_file=$dir/fedora20/toolchain_mingw64.cmake
+	toolchain_file=$dir/fedora20/toolchain.cmake
 elif [[ "Fedora release 21 (Twenty One)" == "$host" ]]
 then
-	toolchain_file=$dir/fedora21/toolchain_mingw64.cmake
+	toolchain_file=$dir/fedora21/toolchain.cmake
 else
 	echo "Don't know how to build windows 64 build in $host"
 	exit

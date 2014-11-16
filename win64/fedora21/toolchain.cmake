@@ -16,6 +16,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
-include( "$ENV{dir}/fedora20/toolchain_mingw64.cmake" )
+include( "$ENV{dir}/fedora20/toolchain.cmake" )
 
 set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} ${Mingw_Path}/libwinpthread-1.dll)
