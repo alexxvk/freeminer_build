@@ -17,42 +17,17 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-cmake_minimum_required(VERSION 2.6)
-if(${CMAKE_VERSION} STREQUAL "2.8.2")
-	# bug http://vtk.org/Bug/view.php?id=11020
-	message( WARNING "CMake/CPack version 2.8.2 will not create working .deb packages!")
-endif(${CMAKE_VERSION} STREQUAL "2.8.2")
+# It seems there is a bug in find_package for mingw32
+set(FREETYPE_INCLUDE_DIR_ft2build ${CMAKE_FIND_ROOT_PATH}/include/freetype2)
+set(FREETYPE_INCLUDE_DIR_freetype2 ${CMAKE_FIND_ROOT_PATH}/include)
+find_package(Freetype QUIET)
 
-#set(CMAKE_VERBOSE_MAKEFILE ON)
-
-SET(TOP_DIR $ENV{TOP})
-SET(OUT_DIR $ENV{OUT})
-SET(SRC_DIR $ENV{TOP}/minetest)
-
-SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
-
-include(license)
-include(zlib)
-include(curl)
-if(ENABLE_SOUND)
-	include(ogg)
-	include(vorbis)
-	include(openal)
+if(FREETYPE_FOUND)
+	if(WIN32)
+		find_file(FREETYPE_DLL libfreetype-6.dll)
+	endif()
+	add_license_dir(/usr/share/doc/mingw64-freetype/LICENSE.TXT freetype2)
+else()
+	#We need to build it ourself
 endif()
 
-include(irrlicht)
-if(ENABLE_LEVELDB)
-	include(leveldb)
-endif()
-include(luajit)
-if(ENABLE_FREETYPE)
-	include(freetype)
-endif()
-
-# Minetest itself
-set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
-set(CMAKE_SOURCE_DIR ${SRC_DIR})
-add_subdirectory(${SRC_DIR} ${OUT_DIR}/_minetest)
-set(CMAKE_SOURCE_DIR ${SAVE_CMAKE_SOURCE_DIR})
-
-include(installation)

@@ -57,11 +57,6 @@ cmake $TOP/build \
 	-DENABLE_FREETYPE=1 \
 	-DENABLE_LEVELDB=1 \
 	\
-	-DFREETYPE_INCLUDE_DIR_freetype2=/usr/x86_64-w64-mingw32/sys-root/mingw/include/\
-	-DFREETYPE_INCLUDE_DIR_ft2build=/usr/x86_64-w64-mingw32/sys-root/mingw/include/freetype2/\
-	-DFREETYPE_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libfreetype.dll.a \
-	-DFREETYPE_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libfreetype-6.dll \
-	\
 	-DCUSTOM_GETTEXT_PATH=/usr/x86_64-w64-mingw32/sys-root/mingw \
 	-DGETTEXT_MSGFMT=`which msgfmt` \
 	-DGETTEXT_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libintl-8.dll \
