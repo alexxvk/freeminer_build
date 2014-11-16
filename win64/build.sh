@@ -31,11 +31,9 @@ export OUT=$TOP/out/win64/
 if [[ "Fedora release 20 (Heisenbug)" == "$host" ]]
 then
 	toolchain_file=$dir/fedora20/toolchain_mingw64.cmake
-	hostdir=$dir/fedora20/
 elif [[ "Fedora release 21 (Twenty One)" == "$host" ]]
 then
 	toolchain_file=$dir/fedora21/toolchain_mingw64.cmake
-	hostdir=$dir/fedora20/
 else
 	echo "Don't know how to build windows 64 build in $host"
 	exit
@@ -58,12 +56,6 @@ cmake $TOP/build \
 	-DENABLE_GETTEXT=1 \
 	-DENABLE_FREETYPE=1 \
 	-DENABLE_LEVELDB=1 \
-	\
-	-DVORBIS_INCLUDE_DIR=/usr/x86_64-w64-mingw32/sys-root/mingw/include \
-	-DVORBIS_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libvorbis.dll.a \
-	-DVORBIS_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libvorbis-0.dll \
-	-DVORBISFILE_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libvorbisfile.dll.a \
-	-DVORBISFILE_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libvorbisfile-3.dll \
 	\
 	-DFREETYPE_INCLUDE_DIR_freetype2=/usr/x86_64-w64-mingw32/sys-root/mingw/include/\
 	-DFREETYPE_INCLUDE_DIR_ft2build=/usr/x86_64-w64-mingw32/sys-root/mingw/include/freetype2/\
