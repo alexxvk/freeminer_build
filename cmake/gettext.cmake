@@ -1,4 +1,3 @@
-#!/bin/bash
 ###############################################################################
 # Minetest
 # Copyright (C) 2010-2014 celeron55, Perttu Ahola <celeron55@gmail.com>
@@ -18,45 +17,17 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-set -e
+SET(CUSTOM_GETTEXT_PATH "${CMAKE_FIND_ROOT_PATH}"
+	CACHE FILEPATH "path to custom gettext")
 
-parallel=`grep -c ^processor /proc/cpuinfo`
-host=`head -1 /etc/issue`
+set(GETTEXT_INCLUDE_DIR ${CMAKE_FIND_ROOT_PATH}/include)
+find_program(GETTEXT_MSGFMT msgfmt)
 
-export dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export TOP=$dir/../..
-export OUT=$TOP/out/win64/
-[[ ! -d $OUT ]] && mkdir -p $OUT
+if(WIN32)
+	find_file(GETTEXT_DLL libintl-8.dll)
+	find_file(GETTEXT_ICONV_DLL iconv.dll)
+	find_file(GETTEXT_LIBRARY libintl.dll.a)
+endif()
+add_license_dir(/usr/share/doc/gettext/COPYING gettext)
+add_license_dir(/usr/share/doc/gettext/COPYING.LIB gettext)
 
-if [[ "Fedora release 20 (Heisenbug)" == "$host" ]]
-then
-	toolchain_file=$dir/fedora20/toolchain_mingw64.cmake
-elif [[ "Fedora release 21 (Twenty One)" == "$host" ]]
-then
-	toolchain_file=$dir/fedora21/toolchain_mingw64.cmake
-else
-	echo "Don't know how to build windows 64 build in $host"
-	exit
-fi
-
-# Build the thing
-cd $TOP/minetest
-git_hash=`git show | head -c14 | tail -c7`
-cd $OUT
-[ ! -d _build ] && mkdir _build
-cd _build
-cmake $TOP/build \
-	-DCMAKE_TOOLCHAIN_FILE=$toolchain_file \
-	-DCMAKE_INSTALL_PREFIX=/tmp \
-	-DVERSION_EXTRA=$git_hash \
-	-DBUILD_CLIENT=1 -DBUILD_SERVER=0 \
-	\
-	-DENABLE_SOUND=1 \
-	-DENABLE_CURL=1 \
-	-DENABLE_GETTEXT=1 \
-	-DENABLE_FREETYPE=1 \
-	-DENABLE_LEVELDB=1
-
-make package -j$parallel
-
-# EOF

@@ -48,6 +48,9 @@ include(luajit)
 if(ENABLE_FREETYPE)
 	include(freetype)
 endif()
+if(ENABLE_GETTEXT)
+	include(gettext)
+endif()
 
 # Minetest itself
 set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
