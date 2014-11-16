@@ -41,6 +41,7 @@ if(ENABLE_LEVELDB)
 	include(leveldb)
 endif()
 include(luajit)
+include(openal)
 
 # Minetest itself
 set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})

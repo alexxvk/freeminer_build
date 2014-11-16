@@ -27,7 +27,6 @@ export dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export TOP=$dir/../..
 export OUT=$TOP/out/win64/
 [[ ! -d $OUT ]] && mkdir -p $OUT
-libdir=$dir/externals
 
 if [[ "Fedora release 20 (Heisenbug)" == "$host" ]]
 then
@@ -40,19 +39,6 @@ then
 else
 	echo "Don't know how to build windows 64 build in $host"
 	exit
-fi
-. $hostdir/env.sh
-
-#Build dependancies
-#OpenAL-soft
-cd $OUT
-if [ ! -f "_externals/openal-soft/OpenAL32.dll" ]
-then
-	mkdir -p _externals/openal-soft
-	cd _externals/openal-soft
-	cmake $TOP/external/openal-soft/ \
-		-DCMAKE_TOOLCHAIN_FILE=$toolchain_file
-	make
 fi
 
 # Build the thing
@@ -78,10 +64,6 @@ cmake $TOP/build \
 	-DVORBIS_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libvorbis-0.dll \
 	-DVORBISFILE_LIBRARY=/usr/x86_64-w64-mingw32/sys-root/mingw/lib/libvorbisfile.dll.a \
 	-DVORBISFILE_DLL=/usr/x86_64-w64-mingw32/sys-root/mingw/bin/libvorbisfile-3.dll \
-	\
-	-DOPENAL_INCLUDE_DIR=$TOP/external/openal-soft/include/AL \
-	-DOPENAL_LIBRARY=$OUT/_externals/openal-soft/libOpenAL32.dll.a \
-	-DOPENAL_DLL=$OUT/_externals/openal-soft/OpenAL32.dll \
 	\
 	-DFREETYPE_INCLUDE_DIR_freetype2=/usr/x86_64-w64-mingw32/sys-root/mingw/include/\
 	-DFREETYPE_INCLUDE_DIR_ft2build=/usr/x86_64-w64-mingw32/sys-root/mingw/include/freetype2/\

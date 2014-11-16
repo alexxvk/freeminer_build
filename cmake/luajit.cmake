@@ -30,4 +30,6 @@ ExternalProject_Add(luajit
 set(LUA_INCLUDE_DIR ${OUT_DIR}/_external/LuaJIT/src)
 set(LUA_LIBRARY ${OUT_DIR}/_external/LuaJIT/src/lua51.dll)
 
+set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} ${LUA_LIBRARY})
+
 add_license_dir(${TOP_DIR}/external/LuaJIT/COPYRIGHT LuaJIT)

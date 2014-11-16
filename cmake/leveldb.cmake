@@ -23,7 +23,7 @@ ExternalProject_Add(leveldb
 		COMMAND mkdir -p ${OUT_DIR}/_external/leveldb/bin
 		COMMAND mkdir -p ${OUT_DIR}/_external/leveldb/lib
 	BINARY_DIR "${OUT_DIR}/_external/leveldb"
-	BUILD_COMMAND TARGET_OS=OS_WINDOWS_CROSSCOMPILE make libleveldb.a libleveldb.dll
+	BUILD_COMMAND TARGET_OS=OS_WINDOWS_CROSSCOMPILE CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} AR=${CMAKE_AR} make libleveldb.a libleveldb.dll
 	BUILD_IN_SOURCE 0
 	INSTALL_COMMAND mv libleveldb.a libleveldb.dll.a lib/
 		COMMAND mv libleveldb.dll bin/

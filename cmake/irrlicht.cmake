@@ -34,7 +34,7 @@ ExternalProject_Add(irrlicht
 		# BUG in d3d9.h (mingw64)
 		# http://sourceforge.net/p/mingw-w64/bugs/409/
 		COMMAND sed -i "s/D3DPRESENT_LINEAR_CONTENT/0x00000002L/g" CD3D9Driver.cpp
-		COMMAND make win32
+		COMMAND CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} AR=${CMAKE_AR} make win32
 	BUILD_IN_SOURCE 0
 	INSTALL_COMMAND ""
 	TEST_COMMAND ""
