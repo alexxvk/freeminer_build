@@ -17,45 +17,17 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-cmake_minimum_required(VERSION 2.6)
-if(${CMAKE_VERSION} STREQUAL "2.8.2")
-	# bug http://vtk.org/Bug/view.php?id=11020
-	message( WARNING "CMake/CPack version 2.8.2 will not create working .deb packages!")
-endif(${CMAKE_VERSION} STREQUAL "2.8.2")
+SET(CUSTOM_GETTEXT_PATH "${CMAKE_FIND_ROOT_PATH}"
+	CACHE FILEPATH "path to custom gettext")
 
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+set(GETTEXT_INCLUDE_DIR ${CMAKE_FIND_ROOT_PATH}/include)
+find_program(GETTEXT_MSGFMT msgfmt)
 
-SET(TOP_DIR $ENV{TOP})
-SET(OUT_DIR $ENV{OUT})
-SET(SRC_DIR $ENV{TOP}/freeminer)
-
-SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
-
-include(license)
-include(zlib)
-include(curl)
-if(ENABLE_SOUND)
-	include(ogg)
-	include(vorbis)
-	include(openal)
+if(WIN32)
+	find_file(GETTEXT_DLL libintl-8.dll)
+	find_file(GETTEXT_ICONV_DLL iconv.dll)
+	find_file(GETTEXT_LIBRARY libintl.dll.a)
 endif()
+add_license_dir(/usr/share/doc/gettext/COPYING gettext)
+add_license_dir(/usr/share/doc/gettext/COPYING.LIB gettext)
 
-include(irrlicht)
-if(ENABLE_LEVELDB)
-	include(leveldb)
-endif()
-include(luajit)
-if(ENABLE_FREETYPE)
-	include(freetype)
-endif()
-if(ENABLE_GETTEXT)
-	include(gettext)
-endif()
-
-# Minetest itself
-set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
-set(CMAKE_SOURCE_DIR ${SRC_DIR})
-add_subdirectory(${SRC_DIR} ${OUT_DIR}/_freeminer)
-set(CMAKE_SOURCE_DIR ${SAVE_CMAKE_SOURCE_DIR})
-
-include(installation)

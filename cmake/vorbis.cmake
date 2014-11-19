@@ -17,6 +17,10 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-export CC="/usr/bin/x86_64-w64-mingw32-gcc"
-export CXX="/usr/bin/x86_64-w64-mingw32-g++"
-export AR="/usr/bin/x86_64-w64-mingw32-ar"
+if(WIN32)
+	find_library(VORBIS_DLL libvorbis-0.dll)
+	find_library(VORBISFILE_DLL libvorbisfile-3.dll)
+endif()
+
+add_license_dir(/usr/share/doc/mingw64-libvorbis/COPYING libvorbis)
+

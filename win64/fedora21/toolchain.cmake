@@ -16,46 +16,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
+include( "$ENV{dir}/fedora20/toolchain.cmake" )
 
-cmake_minimum_required(VERSION 2.6)
-if(${CMAKE_VERSION} STREQUAL "2.8.2")
-	# bug http://vtk.org/Bug/view.php?id=11020
-	message( WARNING "CMake/CPack version 2.8.2 will not create working .deb packages!")
-endif(${CMAKE_VERSION} STREQUAL "2.8.2")
-
-#set(CMAKE_VERBOSE_MAKEFILE ON)
-
-SET(TOP_DIR $ENV{TOP})
-SET(OUT_DIR $ENV{OUT})
-SET(SRC_DIR $ENV{TOP}/freeminer)
-
-SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
-
-include(license)
-include(zlib)
-include(curl)
-if(ENABLE_SOUND)
-	include(ogg)
-	include(vorbis)
-	include(openal)
-endif()
-
-include(irrlicht)
-if(ENABLE_LEVELDB)
-	include(leveldb)
-endif()
-include(luajit)
-if(ENABLE_FREETYPE)
-	include(freetype)
-endif()
-if(ENABLE_GETTEXT)
-	include(gettext)
-endif()
-
-# Minetest itself
-set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
-set(CMAKE_SOURCE_DIR ${SRC_DIR})
-add_subdirectory(${SRC_DIR} ${OUT_DIR}/_freeminer)
-set(CMAKE_SOURCE_DIR ${SAVE_CMAKE_SOURCE_DIR})
-
-include(installation)
+set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} ${Mingw_Path}/libwinpthread-1.dll)

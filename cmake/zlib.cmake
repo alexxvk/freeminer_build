@@ -17,7 +17,6 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-# TODO use the irrlicht one
 find_package(ZLIB)
 if(ZLIB_FOUND)
 	set(ZLIB_INCLUDE_DIR "${ZLIB_INCLUDE_DIR}"
@@ -26,9 +25,9 @@ if(ZLIB_FOUND)
 			CACHE FILEPATH "Path to zlibwapi.lib")
 
 	if(WIN32)
-		find_file(ZLIB_DLL zlib1.dll)
+		find_library(ZLIB_DLL zlib1.dll)
 		set(ZLIB_DLL "${ZLIB_DLL}"
-				CACHE FILEPATH "Path to zlibwapi.dll (for installation)")
+				CACHE FILEPATH "Path to zlib1.dll (for installation)")
 	endif()
 	add_license_dir(/usr/share/licenses/zlib/README zlib)
 else()
