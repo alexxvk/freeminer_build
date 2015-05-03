@@ -55,7 +55,9 @@ cmake $TOP/build \
 	-DENABLE_CURL=1 \
 	-DENABLE_GETTEXT=1 \
 	-DENABLE_FREETYPE=1 \
-	-DENABLE_LEVELDB=1
+	-DENABLE_LEVELDB=1 \
+	\
+	-DENABLE_THREADS=1
 
 make package -j$parallel
 

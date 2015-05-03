@@ -31,9 +31,14 @@ SET(SRC_DIR $ENV{TOP}/freeminer)
 
 SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake") 
 
+set(CMAKE_FIND_LIBRARY_PREFIXES "lib" "")
+set(CMAKE_FIND_LIBRARY_SUFFIXES ".dll" ".dll.a" ".a" ".lib")
+
 include(license)
 include(zlib)
 include(curl)
+include(msgpack)
+
 if(ENABLE_SOUND)
 	include(ogg)
 	include(vorbis)
@@ -41,18 +46,23 @@ if(ENABLE_SOUND)
 endif()
 
 include(irrlicht)
+
 if(ENABLE_LEVELDB)
+	include(snappy)
 	include(leveldb)
 endif()
+
 include(luajit)
+
 if(ENABLE_FREETYPE)
 	include(freetype)
 endif()
+
 if(ENABLE_GETTEXT)
 	include(gettext)
 endif()
 
-# Minetest itself
+# Freeminer itself
 set(SAVE_CMAKE_SOURCE_DIR {CMAKE_SOURCE_DIR})
 set(CMAKE_SOURCE_DIR ${SRC_DIR})
 add_subdirectory(${SRC_DIR} ${OUT_DIR}/_freeminer)

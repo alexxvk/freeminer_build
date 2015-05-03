@@ -17,10 +17,10 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ###############################################################################
 
-find_package(CURL)
+find_package(CURL QUIET)
 if(CURL_FOUND)
 	if(WIN32)
-		find_file(CURL_DLL libcurl-4.dll)
+		find_library(CURL_DLL libcurl-4.dll)
 	endif()
 	add_license_dir(/usr/share/licenses/libcurl/COPYING libcurl)
 else()
