@@ -24,7 +24,7 @@ find_package(Freetype QUIET)
 
 if(FREETYPE_FOUND)
 	if(WIN32)
-		find_file(FREETYPE_DLL libfreetype-6.dll)
+		find_file(FREETYPE_DLL libfreetype-6.dll ${Mingw_Path})
 	endif()
 	add_license_dir(/usr/share/doc/mingw64-freetype/LICENSE.TXT freetype2)
 else()

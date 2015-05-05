@@ -18,7 +18,7 @@
 ###############################################################################
 
 if(WIN32)
-	find_library(OGG_DLL libogg-0.dll)
+	find_file(OGG_DLL libogg-0.dll ${Mingw_Path})
 endif()
 
 add_license_dir(/usr/share/doc/libogg/COPYING libogg)

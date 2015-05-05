@@ -20,7 +20,7 @@
 find_package(CURL QUIET)
 if(CURL_FOUND)
 	if(WIN32)
-		find_library(CURL_DLL libcurl-4.dll)
+		find_file(CURL_DLL libcurl-4.dll ${Mingw_Path})
 	endif()
 	add_license_dir(/usr/share/licenses/libcurl/COPYING libcurl)
 else()

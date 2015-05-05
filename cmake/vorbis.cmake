@@ -18,8 +18,8 @@
 ###############################################################################
 
 if(WIN32)
-	find_library(VORBIS_DLL libvorbis-0.dll)
-	find_library(VORBISFILE_DLL libvorbisfile-3.dll)
+	find_file(VORBIS_DLL libvorbis-0.dll ${Mingw_Path})
+	find_file(VORBISFILE_DLL libvorbisfile-3.dll ${Mingw_Path})
 endif()
 
 add_license_dir(/usr/share/doc/mingw64-libvorbis/COPYING libvorbis)
